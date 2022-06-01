@@ -34,14 +34,21 @@ class _HomePageState extends State<HomePage> {
               children: [
                 Center(
                     child: Container(
-                  height: (size.height) * 0.5,
-                  width: (size.width) * 0.6,
-                  color: Colors.red,
+                  height: (size.height) * 0.4,
+                  width: (size.width) * 0.9,
                   child: _response == null
                       ? Container(
-                          height: (size.height) * 0.5,
-                          width: (size.width) * 0.6,
-                          color: Colors.yellow,
+                          height: (size.height) * 0.4,
+                          width: (size.width) * 0.9,
+                          child: Center(
+                            child: Text(
+                              "SEARCH CITY",
+                              style: TextStyle(
+                                  fontSize: 26,
+                                  letterSpacing: 1.7,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
                         )
                       : Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -62,25 +69,50 @@ class _HomePageState extends State<HomePage> {
                                 style: TextStyle(
                                     fontSize: 20, fontWeight: FontWeight.w500),
                               ),
-                              SizedBox(
-                                height: 12,
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: SizedBox(
+                                  height: 35,
+                                  child: Text(
+                                    '5-Days Forecast',
+                                    style: TextStyle(fontSize: 18),
+                                  ),
+                                ),
                               ),
                               Expanded(
                                 child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
                                   itemCount: indexes.length,
                                   itemBuilder:
                                       (BuildContext context, int index) {
-                                    return Row(
-                                      children: [
-                                        Text('${dates[index]}',
-                                            style: TextStyle(fontSize: 18)),
-                                        SizedBox(
-                                          width: 8,
+                                    return Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 8, bottom: 8, left: 3, right: 3),
+                                      child: Container(
+                                        height: (size.width) * 0.4,
+                                        width: (size.width) * 0.5,
+                                        decoration: BoxDecoration(
+                                          color: Colors.grey.withOpacity(0.4),
+                                          border: Border.all(
+                                              width: 0.7, color: Colors.black),
+                                          borderRadius:
+                                              BorderRadius.circular(14),
                                         ),
-                                        Text(
-                                            '${_response!.list![indexes[index]].main!.temp}',
-                                            style: TextStyle(fontSize: 18)),
-                                      ],
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text('${dates[index]}',
+                                                style: TextStyle(fontSize: 18)),
+                                            SizedBox(
+                                              height: 8,
+                                            ),
+                                            Text(
+                                                '${_response!.list![indexes[index]].main!.temp} °C',
+                                                style: TextStyle(fontSize: 18)),
+                                          ],
+                                        ),
+                                      ),
                                     );
                                   },
                                 ),
@@ -89,6 +121,9 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                 )),
+                SizedBox(
+                  height: 40,
+                ),
                 Center(
                   child: Container(
                     width: (size.width) * 0.6,
@@ -116,12 +151,6 @@ class _HomePageState extends State<HomePage> {
                   },
                   child: Text('Search'),
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    print(currentDate);
-                  },
-                  child: Text('xxxx'),
-                ),
               ],
             ),
           ),
@@ -143,7 +172,7 @@ class _HomePageState extends State<HomePage> {
         if (_response!.list![i].dtTxt!.contains('12:00:00')) {
           indexes.add(i);
           date = DateTime.parse('${_response!.list![i].dtTxt}');
-          formattedDate = DateFormat('MM-dd').format(date);
+          formattedDate = DateFormat('dd/MM, EEE').format(date);
           dates.add(formattedDate!);
         }
       }
