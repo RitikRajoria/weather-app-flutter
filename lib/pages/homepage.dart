@@ -160,6 +160,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _search() async {
+    _response = null;
     final response = await _dataService.getWeather(searchText.text);
     indexes = [];
     dates = [];
