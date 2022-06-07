@@ -69,6 +69,11 @@ class _HomePageState extends State<HomePage> {
                                 style: TextStyle(
                                     fontSize: 20, fontWeight: FontWeight.w500),
                               ),
+                              Container(
+                                  height: 50,
+                                  width: 50,
+                                  child: Image.asset(
+                                      "assets/images/weather_icons/${_response!.list![0].weather![0].icon}.png")),
                               Align(
                                 alignment: Alignment.centerLeft,
                                 child: SizedBox(
@@ -85,6 +90,8 @@ class _HomePageState extends State<HomePage> {
                                   itemCount: indexes.length,
                                   itemBuilder:
                                       (BuildContext context, int index) {
+                                    String? iconsId = _response!
+                                        .list![indexes[index]].weather![0].icon;
                                     return Padding(
                                       padding: const EdgeInsets.only(
                                           top: 8, bottom: 8, left: 3, right: 3),
@@ -110,6 +117,12 @@ class _HomePageState extends State<HomePage> {
                                             Text(
                                                 '${_response!.list![indexes[index]].main!.temp} °C',
                                                 style: TextStyle(fontSize: 18)),
+                                            //icon
+                                            Container(
+                                                height: 50,
+                                                width: 50,
+                                                child: Image.asset(
+                                                    "assets/images/weather_icons/${iconsId}.png")),
                                           ],
                                         ),
                                       ),
