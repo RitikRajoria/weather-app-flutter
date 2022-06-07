@@ -3,10 +3,17 @@ import 'dart:ffi';
 class WeatherResponse {
   List<Lists>? list;
   City? city;
+  String? cod;
 
-  WeatherResponse({this.list, this.city});
+  WeatherResponse({
+    this.list,
+    this.city,
+    this.cod,
+  });
 
   WeatherResponse.fromJson(Map<String, dynamic> json) {
+    cod = json['cod'];
+
     if (json['list'] != null) {
       list = <Lists>[];
       json['list'].forEach((v) {
@@ -18,6 +25,8 @@ class WeatherResponse {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['cod'] = this.cod;
+
     if (this.list != null) {
       data['list'] = this.list!.map((v) => v.toJson()).toList();
     }
@@ -198,8 +207,8 @@ class Coord {
   Coord({this.lat, this.lon});
 
   Coord.fromJson(Map<String, dynamic> json) {
-    lat = json['lat'];
-    lon = json['lon'];
+    lat = json['lat'].toDouble();
+    lon = json['lon'].toDouble();
   }
 
   Map<String, dynamic> toJson() {
