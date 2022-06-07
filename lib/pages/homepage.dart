@@ -171,7 +171,11 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                   ),
                                 )
-                              : Text("Internal Server Error"),
+                              : Container(
+                                  height: (size.height) * 0.4,
+                                  width: (size.width) * 0.9,
+                                  child: Text(
+                                      "Internal Server Error, Try Again!")),
                 )),
                 SizedBox(
                   height: 40,
@@ -182,6 +186,7 @@ class _HomePageState extends State<HomePage> {
                     height: 50,
                     child: TextFormField(
                       controller: searchText,
+                      
                       decoration: InputDecoration(
                         labelText: 'City',
                         hintText: 'Enter City Name',
@@ -196,8 +201,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    if (searchText.text != "" &&
-                        !searchText.text.contains(" ")) {
+                    if (searchText.text.isNotEmpty) {
                       _search();
                     }
                   },
@@ -212,8 +216,10 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _search() async {
+   
     _response = null;
-    final response = await _dataService.getWeather(searchText.text);
+    final response = await _dataService.getWeather(searchText.text.trim());
+    
 
     indexes = [];
     dates = [];
