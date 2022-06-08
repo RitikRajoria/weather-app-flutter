@@ -26,12 +26,14 @@ class _HomePageState extends State<HomePage> {
   int uiChanger = 4;
   bool firstTime = false;
   var yourCity = "";
-  
+  SnackBar snackBar = SnackBar(
+    content: Text('Remove extra spaces!'),
+  );
 
   @override
   void initState() {
     super.initState();
-    
+
     _determinePosition().then((value) {
       _getLocation();
     });
@@ -40,225 +42,242 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return Scaffold(
-      body: Center(
-        child: SingleChildScrollView(
-          child: SafeArea(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Center(
-                    child: Container(
-                  height: (size.height) * 0.4,
-                  width: (size.width) * 0.9,
-                  child: uiChanger == 4
-                      ? Center(
-                          child: CircularProgressIndicator(),
-                        )
-                      : firstTime
-                          ? Center(
-                              child: Container(
-                                height: 60,
-                                width: 60,
-                                child: CircularProgressIndicator(),
-                              ),
-                            )
-                          : uiChanger == 0
-                              ? Container(
-                                  height: (size.height) * 0.4,
-                                  width: (size.width) * 0.9,
-                                  child: Center(
-                                    child: Text(
-                                      "SEARCH CITY",
-                                      style: TextStyle(
-                                          fontSize: 26,
-                                          letterSpacing: 1.7,
-                                          fontWeight: FontWeight.bold),
+    return GestureDetector(
+      onTap: () {
+        FocusScopeNode currentFocus = FocusScope.of(context);
+        if (!currentFocus.hasPrimaryFocus) {
+          currentFocus.unfocus();
+        }
+      },
+      child: Scaffold(
+        body: Center(
+          child: SingleChildScrollView(
+            child: SafeArea(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Center(
+                      child: Container(
+                    height: (size.height) * 0.4,
+                    width: (size.width) * 0.9,
+                    child: uiChanger == 4
+                        ? Center(
+                            child: CircularProgressIndicator(),
+                          )
+                        : firstTime
+                            ? Center(
+                                child: Container(
+                                  height: 60,
+                                  width: 60,
+                                  child: CircularProgressIndicator(),
+                                ),
+                              )
+                            : uiChanger == 0
+                                ? Container(
+                                    height: (size.height) * 0.4,
+                                    width: (size.width) * 0.9,
+                                    child: Center(
+                                      child: Text(
+                                        "SEARCH CITY",
+                                        style: TextStyle(
+                                            fontSize: 26,
+                                            letterSpacing: 1.7,
+                                            fontWeight: FontWeight.bold),
+                                      ),
                                     ),
-                                  ),
-                                )
-                              : uiChanger == 1
-                                  ? Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Column(
-                                        children: [
-                                          Text(
-                                            '${_response!.city!.name}',
-                                            style: TextStyle(
-                                                fontSize: 26,
-                                                fontWeight: FontWeight.bold,
-                                                letterSpacing: 1.5),
-                                          ),
-                                          SizedBox(
-                                            height: 8,
-                                          ),
-                                          Text(
-                                            '${_response!.list![0].main!.temp} °C',
-                                            style: TextStyle(
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.w500),
-                                          ),
-                                          Container(
-                                              height: 50,
-                                              width: 50,
-                                              child: Image.asset(
-                                                  "assets/images/weather_icons/${_response!.list![0].weather![0].icon}.png")),
-                                          Align(
-                                            alignment: Alignment.centerLeft,
-                                            child: SizedBox(
-                                              height: 35,
-                                              child: Text(
-                                                '5-Days Forecast',
-                                                style: TextStyle(fontSize: 18),
+                                  )
+                                : uiChanger == 1
+                                    ? Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Column(
+                                          children: [
+                                            Text(
+                                              '${_response!.city!.name}',
+                                              style: TextStyle(
+                                                  fontSize: 26,
+                                                  fontWeight: FontWeight.bold,
+                                                  letterSpacing: 1.5),
+                                            ),
+                                            SizedBox(
+                                              height: 8,
+                                            ),
+                                            Text(
+                                              '${_response!.list![0].main!.temp} °C',
+                                              style: TextStyle(
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                            Container(
+                                                height: 50,
+                                                width: 50,
+                                                child: Image.asset(
+                                                    "assets/images/weather_icons/${_response!.list![0].weather![0].icon}.png")),
+                                            Align(
+                                              alignment: Alignment.centerLeft,
+                                              child: SizedBox(
+                                                height: 35,
+                                                child: Text(
+                                                  '5-Days Forecast',
+                                                  style:
+                                                      TextStyle(fontSize: 18),
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                          Expanded(
-                                            child: ListView.builder(
-                                              scrollDirection: Axis.horizontal,
-                                              itemCount: indexes.length,
-                                              itemBuilder:
-                                                  (BuildContext context,
-                                                      int index) {
-                                                String? iconsId = _response!
-                                                    .list![indexes[index]]
-                                                    .weather![0]
-                                                    .icon;
-                                                return Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          top: 8,
-                                                          bottom: 8,
-                                                          left: 3,
-                                                          right: 3),
-                                                  child: Container(
-                                                    height: (size.width) * 0.4,
-                                                    width: (size.width) * 0.5,
-                                                    decoration: BoxDecoration(
-                                                      color: Colors.grey
-                                                          .withOpacity(0.4),
-                                                      border: Border.all(
-                                                          width: 0.7,
-                                                          color: Colors.black),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              14),
+                                            Expanded(
+                                              child: ListView.builder(
+                                                scrollDirection:
+                                                    Axis.horizontal,
+                                                itemCount: indexes.length,
+                                                itemBuilder:
+                                                    (BuildContext context,
+                                                        int index) {
+                                                  String? iconsId = _response!
+                                                      .list![indexes[index]]
+                                                      .weather![0]
+                                                      .icon;
+                                                  return Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            top: 8,
+                                                            bottom: 8,
+                                                            left: 3,
+                                                            right: 3),
+                                                    child: Container(
+                                                      height:
+                                                          (size.width) * 0.4,
+                                                      width: (size.width) * 0.5,
+                                                      decoration: BoxDecoration(
+                                                        color: Colors.grey
+                                                            .withOpacity(0.4),
+                                                        border: Border.all(
+                                                            width: 0.7,
+                                                            color:
+                                                                Colors.black),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(14),
+                                                      ),
+                                                      child: Column(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          Text(
+                                                              '${dates[index]}',
+                                                              style: TextStyle(
+                                                                  fontSize:
+                                                                      18)),
+                                                          SizedBox(
+                                                            height: 8,
+                                                          ),
+                                                          Text(
+                                                              '${_response!.list![indexes[index]].main!.temp} °C',
+                                                              style: TextStyle(
+                                                                  fontSize:
+                                                                      18)),
+                                                          //icon
+                                                          Container(
+                                                              height: 50,
+                                                              width: 50,
+                                                              child: Image.asset(
+                                                                  "assets/images/weather_icons/${iconsId}.png")),
+                                                        ],
+                                                      ),
                                                     ),
-                                                    child: Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        Text('${dates[index]}',
-                                                            style: TextStyle(
-                                                                fontSize: 18)),
-                                                        SizedBox(
-                                                          height: 8,
-                                                        ),
-                                                        Text(
-                                                            '${_response!.list![indexes[index]].main!.temp} °C',
-                                                            style: TextStyle(
-                                                                fontSize: 18)),
-                                                        //icon
-                                                        Container(
-                                                            height: 50,
-                                                            width: 50,
-                                                            child: Image.asset(
-                                                                "assets/images/weather_icons/${iconsId}.png")),
-                                                      ],
-                                                    ),
+                                                  );
+                                                },
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      )
+                                    : uiChanger == 2
+                                        ? Container(
+                                            height: (size.height) * 0.4,
+                                            width: (size.width) * 0.9,
+                                            child: Center(
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Text(
+                                                    "SEARCH CITY",
+                                                    style: TextStyle(
+                                                        fontSize: 26,
+                                                        letterSpacing: 1.7,
+                                                        fontWeight:
+                                                            FontWeight.bold),
                                                   ),
-                                                );
-                                              },
+                                                  SizedBox(
+                                                    height: 18,
+                                                  ),
+                                                  Text(
+                                                      "Enter Correct City Name or Check For Spelling Mistake!"),
+                                                ],
+                                              ),
                                             ),
                                           )
-                                        ],
-                                      ),
-                                    )
-                                  : uiChanger == 2
-                                      ? Container(
-                                          height: (size.height) * 0.4,
-                                          width: (size.width) * 0.9,
-                                          child: Center(
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Text(
-                                                  "SEARCH CITY",
-                                                  style: TextStyle(
-                                                      fontSize: 26,
-                                                      letterSpacing: 1.7,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                                SizedBox(
-                                                  height: 18,
-                                                ),
-                                                Text(
-                                                    "Enter Correct City Name or Check For Spelling Mistake!"),
-                                              ],
-                                            ),
-                                          ),
-                                        )
-                                      : Container(
-                                          height: (size.height) * 0.4,
-                                          width: (size.width) * 0.9,
-                                          child: Text(
-                                              "Internal Server Error, Try Again!")),
-                )),
-                SizedBox(
-                  height: 40,
-                ),
-                Center(
-                  child: Container(
-                    width: (size.width) * 0.6,
-                    height: 50,
-                    child: TextFormField(
-                      controller: searchText,
-     
-                      
-                      decoration: InputDecoration(
-                        labelText: 'City',
-                        hintText: 'Enter City Name',
-                      ),
-                      textAlignVertical: TextAlignVertical.center,
-                      textAlign: TextAlign.center,
-                    ),
+                                        : Container(
+                                            height: (size.height) * 0.4,
+                                            width: (size.width) * 0.9,
+                                            child: Text(
+                                                "Internal Server Error, Try Again!")),
+                  )),
+                  SizedBox(
+                    height: 40,
                   ),
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    if (searchText.text.isNotEmpty) {
-                      _search(searchText.text.trim());
-                    }
-                  },
-                  child: Text('Search'),
-                ),
-                Container(
-                  width: (size.width) * 0.6,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      _determinePosition();
-                      _getLocation();
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.my_location),
-                        Text(
-                          "  Use Current Location",
-                          style: TextStyle(fontSize: 18),
+                  Center(
+                    child: Container(
+                      width: (size.width) * 0.6,
+                      height: 50,
+                      child: TextFormField(
+                        controller: searchText,
+                        decoration: InputDecoration(
+                          labelText: 'City',
+                          hintText: 'Enter City Name',
                         ),
-                      ],
+                        textAlignVertical: TextAlignVertical.center,
+                        textAlign: TextAlign.center,
+                      ),
                     ),
                   ),
-                ),
-              ],
+                  SizedBox(
+                    height: 15,
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      if (searchText.text[0] != " ") {
+                        if (searchText.text.isNotEmpty) {
+                          _search(searchText.text.trim());
+                        }
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      }
+                    },
+                    child: Text('Search'),
+                  ),
+                  Container(
+                    width: (size.width) * 0.6,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        _determinePosition();
+                        _getLocation();
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.my_location),
+                          Text(
+                            "  Use Current Location",
+                            style: TextStyle(fontSize: 18),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
