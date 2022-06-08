@@ -26,10 +26,12 @@ class _HomePageState extends State<HomePage> {
   int uiChanger = 4;
   bool firstTime = false;
   var yourCity = "";
+  
 
   @override
   void initState() {
     super.initState();
+    
     _determinePosition().then((value) {
       _getLocation();
     });
@@ -215,6 +217,8 @@ class _HomePageState extends State<HomePage> {
                     height: 50,
                     child: TextFormField(
                       controller: searchText,
+     
+                      
                       decoration: InputDecoration(
                         labelText: 'City',
                         hintText: 'Enter City Name',
@@ -307,6 +311,7 @@ class _HomePageState extends State<HomePage> {
       yourCity = pm[0].locality.toString();
     });
     _search(yourCity);
+    searchText.clear();
   }
 
   Future<Position> _determinePosition() async {
