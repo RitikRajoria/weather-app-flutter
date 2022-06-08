@@ -30,6 +30,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter:
     sdk: flutter
+  geocoding: ^2.0.4
+  geolocator: ^8.2.1
   http: ^0.13.4
   intl: ^0.17.0
 
