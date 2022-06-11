@@ -351,6 +351,7 @@ class _HomePageState extends State<HomePage> {
                                         height: (size.height) * 0.15,
                                         width: double.infinity,
                                         child: ListView.builder(
+                                            physics: BouncingScrollPhysics(),
                                             scrollDirection: Axis.horizontal,
                                             itemCount: todaysData.length,
                                             itemBuilder: (context, index) {
