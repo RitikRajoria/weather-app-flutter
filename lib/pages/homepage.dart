@@ -128,6 +128,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         body: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
           child: SafeArea(
             child: Center(
               child: uiChanger == 4
@@ -205,9 +206,9 @@ class _HomePageState extends State<HomePage> {
                                                   //temp and weather type
                                                   Container(
                                                     child: Text(
-                                                      '${_response!.list![0].main!.temp} °',
+                                                      '${_response!.list![0].main!.temp!.toStringAsFixed(1)}° C',
                                                       style: TextStyle(
-                                                        fontSize: 68,
+                                                        fontSize: 60,
                                                         fontWeight:
                                                             FontWeight.w400,
                                                       ),
@@ -396,7 +397,7 @@ class _HomePageState extends State<HomePage> {
                                                           child: Image.asset(
                                                               "assets/images/weather_icons/${iconsId}.png")),
                                                       Text(
-                                                        "${_response!.list![todaysDataIndexes[index]].main!.temp}°",
+                                                        "${_response!.list![todaysDataIndexes[index]].main!.temp!.toStringAsFixed(1)}° C",
                                                         style: TextStyle(
                                                             fontSize: 20,
                                                             fontWeight:
@@ -418,7 +419,7 @@ class _HomePageState extends State<HomePage> {
                                     //5 - day forecast
 
                                     Container(
-                                      height: (size.height) * 0.57,
+                                      height: (size.height) * 0.56,
                                       width: double.infinity,
                                       child: ListView.builder(
                                           physics:
@@ -455,7 +456,7 @@ class _HomePageState extends State<HomePage> {
                                                     Container(
                                                       padding: EdgeInsets.only(
                                                           left: 12),
-                                                      width: (size.width) * 0.3,
+                                                      width: (size.width) * 0.4,
                                                       child: Text(
                                                         "${dates[index]}",
                                                         style: TextStyle(
@@ -469,12 +470,15 @@ class _HomePageState extends State<HomePage> {
                                                           "assets/images/weather_icons/${iconsId}.png"),
                                                     ),
                                                     Container(
-                                                      width:
-                                                          (size.width) * 0.15,
-                                                      child: Text(
-                                                        "${_response!.list![indexes[index]].main!.temp}°",
-                                                        style: TextStyle(
-                                                            fontSize: 20),
+                                                      width: (size.width) * 0.3,
+                                                      child: Align(
+                                                        alignment: Alignment
+                                                            .centerRight,
+                                                        child: Text(
+                                                          "${_response!.list![indexes[index]].main!.temp!.toStringAsFixed(1)}° C ",
+                                                          style: TextStyle(
+                                                              fontSize: 20),
+                                                        ),
                                                       ),
                                                     ),
                                                   ],
