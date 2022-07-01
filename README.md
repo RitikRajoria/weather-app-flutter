@@ -1,6 +1,10 @@
-# weather_app
+# Weather App Flutter
 
-A new Flutter project.
+A Flutter application to view current weather status and 5 day weather forecast.
+
+
+![alt text](https://github.com/RitikRajoria/weather-app-flutter/blob/main/App%20Screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2013%20-%202022-06-29%20at%2021.51.30.png)
+![alt text](https://github.com/RitikRajoria/weather-app-flutter/blob/main/App%20Screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2013%20-%202022-06-29%20at%2021.51.30.png)
 
 ## Getting Started
 
