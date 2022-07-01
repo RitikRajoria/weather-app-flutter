@@ -2,9 +2,9 @@
 
 A Flutter application to view current weather status and 5 day weather forecast.
 
+<img src="(https://github.com/RitikRajoria/weather-app-flutter/blob/main/App%20Screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2013%20-%202022-06-29%20at%2021.51.30.png" width="150" height ="250"/>
 
-![alt text](https://github.com/RitikRajoria/weather-app-flutter/blob/main/App%20Screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2013%20-%202022-06-29%20at%2021.51.30.png =x200)
-![alt text](https://github.com/RitikRajoria/weather-app-flutter/blob/main/App%20Screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2013%20-%202022-06-29%20at%2021.51.30.png)
+<img src="https://github.com/RitikRajoria/weather-app-flutter/blob/main/App%20Screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2013%20-%202022-06-29%20at%2021.51.30.png" width="150" height="250"/>
 
 ## Getting Started
 
