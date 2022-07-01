@@ -2,9 +2,17 @@
 
 A Flutter application to view current weather status and 5 day weather forecast.
 
-<img src="(https://github.com/RitikRajoria/weather-app-flutter/blob/main/App%20Screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2013%20-%202022-06-29%20at%2021.51.30.png?raw=true" width=50% height =50%/>
+<img src="https://github.com/RitikRajoria/weather-app-flutter/blob/main/App%20Screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2013%20-%202022-06-29%20at%2021.51.30.png?raw=true" width=35% height=50%/>
+<img src="https://github.com/RitikRajoria/weather-app-flutter/blob/main/App%20Screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2013%20-%202022-06-29%20at%2021.57.09.png?raw=true" width=35% height=50%/>.
 
-<img src="https://github.com/RitikRajoria/weather-app-flutter/blob/main/App%20Screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2013%20-%202022-06-29%20at%2021.57.09.png?raw=true" width=50% height=50%/>
+### Prerequisites
+
+**Flutter**
+
+- [Flutter documentation](https://flutter.dev/docs)
+- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+
 
 ## About App
 
@@ -16,9 +24,9 @@ forecast.
 
 ## Supported Features
 
-- [x] Current weather (condition and temperature)
-- [x] 5-day weather forecast
-- [x] Search by city
+- :white_check_mark: Current weather (condition and temperature)
+- :white_check_mark: 5-day weather forecast
+- :white_check_mark: Search by city
 
 ## Packages in use
 
